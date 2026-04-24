@@ -51,6 +51,15 @@ __pycache__/
 *pyc*
 venv/
 .venv/
+.venv311/
+
+# Backend env
+backend/.env
+
+# Frontend env
+frontend/.env
+frontend/.env.local
+frontend/.env.production.local
 
 # Development tools
 chainlit.md
