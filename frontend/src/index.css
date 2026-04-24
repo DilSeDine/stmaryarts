@@ -1,0 +1,147 @@
+@import url("https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500,400&f[]=satoshi@400,500,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background-color: #faf7f5;
+    color: #1c1917;
+    font-family: "Satoshi", "Inter", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "ss01", "ss02";
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: "Cabinet Grotesk", "Space Grotesk", Inter, system-ui, sans-serif;
+    letter-spacing: -0.03em;
+}
+
+@layer base {
+    :root {
+        --background: 30 25% 97%;
+        --foreground: 20 14% 10%;
+        --card: 0 0% 100%;
+        --card-foreground: 20 14% 10%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 20 14% 10%;
+        --primary: 20 14% 10%;
+        --primary-foreground: 30 25% 97%;
+        --secondary: 24 6% 93%;
+        --secondary-foreground: 20 14% 10%;
+        --muted: 24 6% 93%;
+        --muted-foreground: 25 5% 45%;
+        --accent: 24 6% 93%;
+        --accent-foreground: 20 14% 10%;
+        --destructive: 0 72% 51%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 20 6% 90%;
+        --input: 20 6% 90%;
+        --ring: 20 14% 10%;
+        --radius: 0.5rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* Subtle grain texture for premium material feel */
+.grain-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+}
+
+/* Custom checkmark marker */
+.marker-plus li {
+    position: relative;
+    padding-left: 1.75rem;
+}
+.marker-plus li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.65rem;
+    width: 14px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.6;
+}
+
+/* Hero radial gradient backdrop */
+.hero-radial {
+    background: radial-gradient(
+        ellipse 80% 60% at 50% 40%,
+        rgba(226, 232, 240, 0.55) 0%,
+        rgba(250, 247, 245, 0) 70%
+    );
+}
+
+.section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: "Satoshi", sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #57534e;
+}
+.section-label::before {
+    content: "";
+    width: 2rem;
+    height: 1px;
+    background: #57534e;
+    display: inline-block;
+}
+
+.mix-multiply {
+    mix-blend-mode: multiply;
+}
+
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
+    }
+    [data-debug-wrapper="true"] > * {
+        margin-left: inherit;
+        margin-right: inherit;
+        margin-top: inherit;
+        margin-bottom: inherit;
+        padding-left: inherit;
+        padding-right: inherit;
+        padding-top: inherit;
+        padding-bottom: inherit;
+        column-gap: inherit;
+        row-gap: inherit;
+        gap: inherit;
+        border-left-width: inherit;
+        border-right-width: inherit;
+        border-top-width: inherit;
+        border-bottom-width: inherit;
+        border-left-style: inherit;
+        border-right-style: inherit;
+        border-top-style: inherit;
+        border-bottom-style: inherit;
+        border-left-color: inherit;
+        border-right-color: inherit;
+        border-top-color: inherit;
+        border-bottom-color: inherit;
+    }
+}

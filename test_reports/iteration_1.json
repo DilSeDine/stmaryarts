@@ -1,0 +1,33 @@
+{
+  "summary": "Full end-to-end testing of St Mary Arts landing page — 7/7 backend pytest cases pass; all critical frontend flows (hero, sticky header, nav, model cards, sticky checkout bar, inquiry dialog + submission, spec table highlight, contact block, WhatsApp href) verified via Playwright. End-to-end inquiry submission confirmed persisted in MongoDB with no _id leaked.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "backend/server.py uses deprecated FastAPI @app.on_event('shutdown') — consider migrating to lifespan context manager (non-blocking).",
+    "POST /api/inquiries responds with 200 instead of the more REST-conventional 201 Created (acceptable, but a minor nit).",
+    "InquiryDialog.jsx posts model as modelName (display name, e.g. 'Studio Acrylic \u00b7 LED') rather than the model id — backend stores whatever string is sent, which is fine for the current schema but worth noting if later analytics want a stable id."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "n/a (no auth on this MVP)",
+  "seed_data_creation": "Created ~5 TEST_-prefixed inquiry documents in Mongo 'inquiries' collection during testing; no cleanup performed as backend exposes no delete endpoint.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend test at /app/backend/tests/backend_test.py covers health + inquiry CRUD validation + desc sort. All passed. Frontend is single-page at '/'. WhatsApp number=919613503503, phone=+91 96135 03503. data-testid values verified: hero-headline, sticky-header, logo-link, nav-{models|philosophy|places|specs|reviews|visit}-link, header-cta-btn, model-card-{brass|bronze|acrylic}, sticky-checkout-bar, checkout-whatsapp-btn, checkout-inquiry-btn, inquiry-dialog, inquiry-name-input, inquiry-phone-input, inquiry-email-input, inquiry-model-select, inquiry-message-input, inquiry-submit-btn, inquiry-success, inquiry-close-btn, spec-table, contact-section.",
+  "rca of the issue": "No issues found."
+}

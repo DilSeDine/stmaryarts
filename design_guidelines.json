@@ -1,0 +1,181 @@
+{
+  "theme": "light",
+  "archetype": "Premium Material-Minimalism (Blend of Swiss High-Contrast & Organic Earthy)",
+  "typography": {
+    "primary": "Cabinet Grotesk",
+    "primary_fallback": "sans-serif",
+    "secondary": "Satoshi",
+    "secondary_fallback": "sans-serif",
+    "heading_scale": {
+      "h1": "text-5xl md:text-6xl lg:text-[72px] tracking-tight leading-none",
+      "h2": "text-4xl md:text-5xl tracking-tight leading-tight",
+      "h3": "text-2xl md:text-3xl tracking-tight",
+      "h4": "text-xl font-medium tracking-tight"
+    },
+    "body_scale": {
+      "large": "text-lg md:text-xl leading-relaxed",
+      "base": "text-base leading-relaxed",
+      "small": "text-sm uppercase tracking-[0.1em]"
+    }
+  },
+  "colors": {
+    "background": {
+      "primary": "#FAF7F5",
+      "secondary": "#F5F2EF",
+      "dark": "#1C1917"
+    },
+    "surface": {
+      "light": "#FFFFFF",
+      "dark": "#292524",
+      "glass": "rgba(250, 247, 245, 0.7)"
+    },
+    "text": {
+      "primary": "#1C1917",
+      "secondary": "#57534E",
+      "inverse": "#FAF7F5",
+      "inverse_secondary": "#A8A29E"
+    },
+    "brand": {
+      "wood": "#A67B5B",
+      "aluminum": "#E2E8F0",
+      "brass": "#D4AF37",
+      "bronze": "#CD7F32"
+    },
+    "border": {
+      "light": "#E7E5E4",
+      "dark": "#44403C",
+      "active": "#1C1917"
+    }
+  },
+  "spacing_and_layout": {
+    "container": "max-w-7xl mx-auto px-6 md:px-12",
+    "section": "py-24 md:py-32",
+    "grid_gap": "gap-8 md:gap-12",
+    "radius": {
+      "sm": "rounded-sm",
+      "md": "rounded-md",
+      "lg": "rounded-lg",
+      "none": "rounded-none"
+    }
+  },
+  "motion_and_interactions": {
+    "fade_in_up": "transition-all duration-800 ease-out transform translate-y-0 opacity-100 starting:-translate-y-8 starting:opacity-0",
+    "hover_scale": "transition-transform duration-500 ease-out hover:scale-[1.02]",
+    "hover_image_color": "grayscale hover:grayscale-0 transition-all duration-700 ease-in-out",
+    "button_hover": "hover:bg-stone-800 transition-colors duration-300"
+  },
+  "components": {
+    "StickyHeader": {
+      "height": "h-[80px]",
+      "classes": "fixed top-0 w-full z-50 backdrop-blur-xl bg-[#FAF7F5]/80 border-b border-[#E7E5E4] flex items-center justify-between px-6 md:px-12",
+      "details": "Logo left (Cabinet Grotesk), centered nav links (Satoshi, text-sm uppercase), cart/search icons right. Ensure text contrasts well."
+    },
+    "ProductTheaterHero": {
+      "classes": "relative pt-[120px] pb-24 px-6 md:px-12 flex flex-col items-center text-center bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#E2E8F0]/30 to-[#FAF7F5]",
+      "details": "72px tracking-tight headline. 21:9 image container below text, spanning wide. Image should have 'max-h-[80vh] object-cover rounded-md'. Floating Material Highlight Badges absolute positioned on the image corners."
+    },
+    "MaterialBadge": {
+      "classes": "absolute backdrop-blur-md bg-white/90 border border-stone-200 px-4 py-2 rounded-sm shadow-sm flex items-center gap-2",
+      "details": "Contains a small color swatch (e.g. wood or brass color) and uppercase material text. Use lucide-react icons if needed."
+    },
+    "InteractiveModelSelection": {
+      "classes": "grid grid-cols-1 md:grid-cols-3 gap-6",
+      "card_classes": "h-[480px] bg-white border border-stone-200 cursor-pointer transition-all duration-500 hover:scale-[1.02] flex flex-col relative overflow-hidden",
+      "active_card_classes": "border-stone-900 shadow-lg ring-1 ring-stone-900",
+      "details": "3-card grid for Brass, Bronze, Acrylic/LED. Include image filling top 70%, text info at bottom 30%. Add a 'Select' button that appears on active."
+    },
+    "EditorialPhilosophy": {
+      "classes": "grid grid-cols-1 lg:grid-cols-2 gap-16 items-center",
+      "image_grid_classes": "grid grid-cols-2 gap-4",
+      "image_item_classes": "relative aspect-[3/4] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700",
+      "details": "Split layout. Left text (Cabinet Grotesk H2 + Satoshi body). Right staggered 4-image grid showcasing craftsmanship. First column shifted down via mt-12."
+    },
+    "FeatureWalkthrough": {
+      "classes": "bg-[#1C1917] text-[#FAF7F5] py-32 px-6 md:px-12",
+      "grid_classes": "grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto",
+      "details": "Use for Home, Office, Apartment contexts. Minimalist icons (lucide-react), large numerals (01, 02, 03), short descriptive text."
+    },
+    "SpecificationTable": {
+      "classes": "w-full text-left border-collapse",
+      "row_classes": "border-b border-stone-200 transition-colors hover:bg-stone-50",
+      "cell_classes": "py-6 px-4 align-top",
+      "featured_column_classes": "bg-stone-50/50 font-medium",
+      "details": "Horizontal dividers only. Columns: Feature, Brass, Bronze, Acrylic. Clean Satoshi font, text-sm or text-base."
+    },
+    "CustomerReviews": {
+      "classes": "py-24 text-center",
+      "details": "Highlight 4.9/5 rating and 128 reviews. Minimalist grid of 3 review cards. Cards: border border-stone-200, p-8, left-aligned text."
+    },
+    "StickyCheckoutBar": {
+      "classes": "fixed bottom-0 left-0 w-full bg-white border-t border-stone-200 p-4 md:p-6 z-40 flex items-center justify-between lg:justify-center lg:gap-24 shadow-[0_-4px_24px_rgba(0,0,0,0.05)] transition-transform duration-300",
+      "button_classes": "bg-[#1C1917] text-[#FAF7F5] px-8 py-3 rounded-sm hover:bg-[#292524] transition-colors flex items-center gap-2 text-sm uppercase tracking-wider font-medium",
+      "details": "Shows currently selected model, price or 'Request Quote', and a WhatsApp CTA button."
+    }
+  },
+  "media": {
+    "images": {
+      "hero_product": {
+        "url": "https://images.unsplash.com/photo-1770259406678-420c4adc44f5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwzfHxibGFuayUyMG1ldGFsJTIwc2lnbiUyMG9uJTIwd2FsbHxlbnwwfHx8fDE3NzcwMTE4NjB8MA&ixlib=rb-4.1.0&q=85",
+        "alt": "Blank white sign on textured wall",
+        "description": "Used for Hero Theater 21:9 image container"
+      },
+      "model_brass": {
+        "url": "https://images.pexels.com/photos/5202422/pexels-photo-5202422.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "alt": "Brass texture close up",
+        "description": "Used for Brass Model card"
+      },
+      "model_bronze": {
+        "url": "https://images.pexels.com/photos/12114196/pexels-photo-12114196.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "alt": "Bronze metal details",
+        "description": "Used for Bronze Model card"
+      },
+      "model_acrylic": {
+        "url": "https://images.pexels.com/photos/35339499/pexels-photo-35339499.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "alt": "Modern acrylic and glass architecture",
+        "description": "Used for Acrylic/LED Model card"
+      },
+      "craftsmanship_1": {
+        "url": "https://images.pexels.com/photos/14853641/pexels-photo-14853641.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "alt": "Artisan metalworker",
+        "description": "Editorial section staggered grid image"
+      },
+      "craftsmanship_2": {
+        "url": "https://images.pexels.com/photos/32612238/pexels-photo-32612238.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "alt": "Artisan wood carver",
+        "description": "Editorial section staggered grid image"
+      },
+      "craftsmanship_3": {
+        "url": "https://images.unsplash.com/photo-1771692820572-8dc0c0cc47fe?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzR8MHwxfHNlYXJjaHwzfHx3b29kJTIwY2FydmluZyUyMGNyYWZ0c21hbnNoaXB8ZW58MHx8fHwxNzc3MDExODU5fDA&ixlib=rb-4.1.0&q=85",
+        "alt": "Intricate wood carving",
+        "description": "Editorial section staggered grid image"
+      },
+      "craftsmanship_4": {
+        "url": "https://images.pexels.com/photos/13701662/pexels-photo-13701662.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "alt": "Tools at workbench",
+        "description": "Editorial section staggered grid image"
+      },
+      "context_office": {
+        "url": "https://images.pexels.com/photos/9060306/pexels-photo-9060306.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "alt": "Modern apartment exterior",
+        "description": "Feature walkthrough background or reference"
+      }
+    },
+    "icons": {
+      "library": "lucide-react",
+      "usage": "Use MapPin for location, Phone for contact, Star for reviews, ShoppingCart for header, Search for header, MessageCircle for WhatsApp CTA, Check for active states."
+    }
+  },
+  "testing": {
+    "attributes": "All interactive elements (buttons, nav links, model selection cards, checkout bar) must include data-testid. E.g. data-testid=\"nav-home-link\", data-testid=\"model-card-brass\", data-testid=\"checkout-whatsapp-btn\"."
+  },
+  "instructions_to_main_agent": [
+    "Install custom fonts 'Cabinet Grotesk' and 'Satoshi' via fontsource or google fonts, or apply generic fallback styling simulating them (e.g. tightly tracked geometric sans).",
+    "Construct the UI in single landing page structure.",
+    "Implement the Interactive Model Selection as a React state that updates the Sticky Checkout Bar at the bottom.",
+    "Apply the grayscale-to-color hover effect precisely as specified in the Editorial section using Tailwind group-hover or direct hover classes.",
+    "Ensure 'Stone-50' (#FAF7F5) is the primary body background, avoiding pure white except for specific cards.",
+    "For the Feature Walkthrough, use dark mode inverse colors (#1C1917 bg).",
+    "Build the Specification Table cleanly with Tailwind table utility classes, hiding vertical borders.",
+    "Do not use generic placeholder images; use the provided image URLs."
+  ]
+}
