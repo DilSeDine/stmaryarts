@@ -1,5 +1,6 @@
 import React from "react";
 import { Star, Quote } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 const REVIEWS = [
   {
@@ -23,6 +24,7 @@ const REVIEWS = [
 ];
 
 const Reviews = () => {
+  const { t } = useI18n();
   return (
     <section
       id="reviews"
@@ -32,9 +34,9 @@ const Reviews = () => {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div>
-            <span className="section-label">Said, on the doorstep</span>
-            <h2 className="mt-4 font-display font-[800] text-stone-900 text-[40px] md:text-[56px] leading-[0.98] tracking-tightest max-w-2xl">
-              4.9 out of 5,<br />across 128 reviews.
+            <span className="section-label">{t("reviews.label")}</span>
+            <h2 className="mt-4 font-display font-[800] text-stone-900 text-[40px] md:text-[56px] leading-[0.98] tracking-tightest max-w-2xl whitespace-pre-line">
+              {t("reviews.h2")}
             </h2>
           </div>
           <div className="flex items-center gap-2 text-stone-700">
@@ -42,7 +44,7 @@ const Reviews = () => {
               <Star key={i} className="w-5 h-5 fill-stone-900 text-stone-900" />
             ))}
             <span className="ml-2 text-[13px] uppercase tracking-[0.2em]">
-              Google Reviews
+              {t("reviews.google")}
             </span>
           </div>
         </div>

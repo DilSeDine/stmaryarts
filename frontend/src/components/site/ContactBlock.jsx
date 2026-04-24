@@ -1,5 +1,5 @@
 import React from "react";
-import { MapPin, Phone, Clock, CreditCard, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Clock, CreditCard, MessageCircle, CalendarDays } from "lucide-react";
 import {
   PHONE_NUMBER,
   PHONE_RAW,
@@ -7,8 +7,10 @@ import {
   SHOP_HOURS,
   WHATSAPP_NUMBER,
 } from "@/lib/constants";
+import { useI18n } from "@/lib/i18n";
 
-const ContactBlock = ({ onOpenInquiry }) => {
+const ContactBlock = ({ onOpenInquiry, onOpenAppointment }) => {
+  const { t } = useI18n();
   const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     "Hello St Mary Arts, I would like to discuss a custom name plate."
   )}`;
@@ -24,33 +26,39 @@ const ContactBlock = ({ onOpenInquiry }) => {
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
         <div>
-          <span className="section-label">Visit the studio</span>
-          <h2 className="mt-4 font-display font-[800] text-stone-900 text-[40px] md:text-[56px] leading-[0.98] tracking-tightest">
-            Come look at<br />the samples.
+          <span className="section-label">{t("contact.label")}</span>
+          <h2 className="mt-4 font-display font-[800] text-stone-900 text-[40px] md:text-[56px] leading-[0.98] tracking-tightest whitespace-pre-line">
+            {t("contact.h2")}
           </h2>
           <p className="mt-6 text-stone-600 text-[17px] leading-relaxed max-w-md">
-            We keep a small showroom of finished plates and material samples in
-            Begur. Appointments are gentle — just call ahead so Anthony or
-            Jackson can spend time with you.
+            {t("contact.p")}
           </p>
 
           <div className="mt-10 flex flex-wrap gap-3">
             <button
-              data-testid="contact-request-btn"
-              onClick={onOpenInquiry}
+              data-testid="contact-book-btn"
+              onClick={onOpenAppointment}
               className="inline-flex items-center gap-2 bg-stone-900 text-stone-50 rounded-full px-6 py-3.5 text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-stone-800 transition-colors"
             >
-              Request design
+              <CalendarDays className="w-4 h-4" />
+              {t("contact.book")}
+            </button>
+            <button
+              data-testid="contact-request-btn"
+              onClick={onOpenInquiry}
+              className="inline-flex items-center gap-2 border-2 border-stone-900 text-stone-900 rounded-full px-6 py-3.5 text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-stone-900 hover:text-stone-50 transition-colors"
+            >
+              {t("contact.request")}
             </button>
             <a
               href={waLink}
               target="_blank"
               rel="noreferrer"
               data-testid="contact-whatsapp-btn"
-              className="inline-flex items-center gap-2 border-2 border-stone-900 text-stone-900 rounded-full px-6 py-3.5 text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-stone-900 hover:text-stone-50 transition-colors"
+              className="inline-flex items-center gap-2 text-stone-700 px-4 py-3.5 text-[12px] uppercase tracking-[0.2em] font-medium hover:text-stone-900 transition-colors"
             >
               <MessageCircle className="w-4 h-4" />
-              WhatsApp us
+              {t("contact.whatsapp")}
             </a>
           </div>
         </div>
@@ -60,26 +68,26 @@ const ContactBlock = ({ onOpenInquiry }) => {
             {[
               {
                 icon: MapPin,
-                label: "Address",
+                label: t("contact.address"),
                 value: SHOP_ADDRESS,
                 link: mapsLink,
-                linkText: "Open in Maps",
+                linkText: t("contact.openMaps"),
               },
               {
                 icon: Phone,
-                label: "Call",
+                label: t("contact.call"),
                 value: PHONE_NUMBER,
                 link: `tel:${PHONE_RAW}`,
-                linkText: "Dial now",
+                linkText: t("contact.dial"),
               },
               {
                 icon: Clock,
-                label: "Hours",
+                label: t("contact.hours"),
                 value: SHOP_HOURS,
               },
               {
                 icon: CreditCard,
-                label: "Payments",
+                label: t("contact.payments"),
                 value: "Cash · Google Pay",
               },
             ].map((row) => {

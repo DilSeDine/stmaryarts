@@ -1,5 +1,6 @@
 import React from "react";
 import { Home, Building2, Briefcase } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 const PLACES = [
   {
@@ -44,6 +45,7 @@ const PLACES = [
 ];
 
 const FeatureWalkthrough = () => {
+  const { t } = useI18n();
   return (
     <section
       id="places"
@@ -54,15 +56,14 @@ const FeatureWalkthrough = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div>
             <span className="section-label text-stone-400 before:bg-stone-500">
-              <span className="text-stone-400">Where our work lives</span>
+              <span className="text-stone-400">{t("places.label")}</span>
             </span>
-            <h2 className="mt-4 font-display font-[800] text-[40px] md:text-[56px] leading-[0.98] tracking-tightest text-stone-50 max-w-2xl">
-              From a quiet villa door<br />to a lobby at scale.
+            <h2 className="mt-4 font-display font-[800] text-[40px] md:text-[56px] leading-[0.98] tracking-tightest text-stone-50 max-w-2xl whitespace-pre-line">
+              {t("places.h2")}
             </h2>
           </div>
           <p className="text-stone-400 max-w-sm text-[15px] leading-relaxed">
-            Every plate is commissioned for a specific context. Here&apos;s how
-            the same craft reads across three very different doorways.
+            {t("places.p")}
           </p>
         </div>
 

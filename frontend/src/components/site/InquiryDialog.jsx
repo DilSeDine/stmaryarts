@@ -20,10 +20,12 @@ import {
 import { toast } from "sonner";
 import { MODELS } from "@/lib/constants";
 import { Loader2, Check } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const InquiryDialog = ({ open, onOpenChange, selectedModel, onSelectModel }) => {
+  const { t } = useI18n();
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -51,7 +53,7 @@ const InquiryDialog = ({ open, onOpenChange, selectedModel, onSelectModel }) => 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.name.trim() || !form.phone.trim()) {
-      toast.error("Please share your name and phone number.");
+      toast.error(t("inquiry.errRequired"));
       return;
     }
     setSubmitting(true);
@@ -64,10 +66,10 @@ const InquiryDialog = ({ open, onOpenChange, selectedModel, onSelectModel }) => 
         message: form.message.trim(),
       });
       setSuccess(true);
-      toast.success("Thank you — Anthony or Jackson will be in touch shortly.");
+      toast.success(t("inquiry.successToast"));
     } catch (err) {
       console.error(err);
-      toast.error("Could not submit right now. Please call 096135 03503.");
+      toast.error(t("inquiry.errGeneric"));
     } finally {
       setSubmitting(false);
     }
@@ -81,13 +83,12 @@ const InquiryDialog = ({ open, onOpenChange, selectedModel, onSelectModel }) => 
       >
         <div className="p-8 md:p-10">
           <DialogHeader className="text-left space-y-3">
-            <span className="section-label">Request a design</span>
+            <span className="section-label">{t("inquiry.label")}</span>
             <DialogTitle className="font-display font-[800] text-[32px] md:text-[36px] leading-[1.02] tracking-tightest text-stone-900">
-              Tell us about your doorway.
+              {t("inquiry.h2")}
             </DialogTitle>
             <DialogDescription className="text-stone-600 text-[14px] leading-relaxed">
-              Share a few details. We&apos;ll call within a day, send a rendered
-              preview, and confirm pricing before anything is cast.
+              {t("inquiry.sub")}
             </DialogDescription>
           </DialogHeader>
 
@@ -100,18 +101,17 @@ const InquiryDialog = ({ open, onOpenChange, selectedModel, onSelectModel }) => 
                 <Check className="w-6 h-6" />
               </div>
               <h3 className="mt-5 font-display font-bold text-[22px] text-stone-900">
-                Your request is in.
+                {t("inquiry.successH2")}
               </h3>
               <p className="mt-2 text-stone-600 text-[14px] max-w-sm">
-                We&apos;ll reach out shortly at the number you shared. Meanwhile,
-                you can also WhatsApp us at 96135 03503.
+                {t("inquiry.successP")}
               </p>
               <button
                 onClick={() => onOpenChange(false)}
                 className="mt-8 bg-stone-900 text-stone-50 rounded-full px-6 py-3 text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-stone-800 transition-colors"
                 data-testid="inquiry-close-btn"
               >
-                Close
+                {t("inquiry.close")}
               </button>
             </div>
           ) : (
@@ -119,21 +119,21 @@ const InquiryDialog = ({ open, onOpenChange, selectedModel, onSelectModel }) => 
               <div className="grid grid-cols-1 gap-5">
                 <div>
                   <Label htmlFor="inq-name" className="text-[11px] uppercase tracking-[0.2em] text-stone-600">
-                    Name
+                    {t("inquiry.name")}
                   </Label>
                   <Input
                     id="inq-name"
                     data-testid="inquiry-name-input"
                     value={form.name}
                     onChange={(e) => update("name", e.target.value)}
-                    placeholder="Your full name"
+                    placeholder={t("inquiry.namePh")}
                     className="mt-2 bg-white border-stone-200 rounded-full h-12 px-5 text-[15px]"
                   />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
                     <Label htmlFor="inq-phone" className="text-[11px] uppercase tracking-[0.2em] text-stone-600">
-                      Phone
+                      {t("inquiry.phone")}
                     </Label>
                     <Input
                       id="inq-phone"
@@ -146,7 +146,7 @@ const InquiryDialog = ({ open, onOpenChange, selectedModel, onSelectModel }) => 
                   </div>
                   <div>
                     <Label htmlFor="inq-email" className="text-[11px] uppercase tracking-[0.2em] text-stone-600">
-                      Email (optional)
+                      {t("inquiry.email")}
                     </Label>
                     <Input
                       id="inq-email"
@@ -162,7 +162,7 @@ const InquiryDialog = ({ open, onOpenChange, selectedModel, onSelectModel }) => 
 
                 <div>
                   <Label className="text-[11px] uppercase tracking-[0.2em] text-stone-600">
-                    Material
+                    {t("inquiry.material")}
                   </Label>
                   <Select
                     value={selectedModel}
@@ -172,7 +172,7 @@ const InquiryDialog = ({ open, onOpenChange, selectedModel, onSelectModel }) => 
                       data-testid="inquiry-model-select"
                       className="mt-2 bg-white border-stone-200 rounded-full h-12 px-5 text-[15px]"
                     >
-                      <SelectValue placeholder="Choose a material" />
+                      <SelectValue placeholder={t("inquiry.materialPh")} />
                     </SelectTrigger>
                     <SelectContent>
                       {MODELS.map((m) => (
@@ -186,14 +186,14 @@ const InquiryDialog = ({ open, onOpenChange, selectedModel, onSelectModel }) => 
 
                 <div>
                   <Label htmlFor="inq-message" className="text-[11px] uppercase tracking-[0.2em] text-stone-600">
-                    Brief (optional)
+                    {t("inquiry.brief")}
                   </Label>
                   <Textarea
                     id="inq-message"
                     data-testid="inquiry-message-input"
                     value={form.message}
                     onChange={(e) => update("message", e.target.value)}
-                    placeholder="Names, size, typography preferences, installation notes…"
+                    placeholder={t("inquiry.briefPh")}
                     className="mt-2 bg-white border-stone-200 rounded-[20px] p-5 text-[15px] min-h-[120px]"
                   />
                 </div>
@@ -209,10 +209,10 @@ const InquiryDialog = ({ open, onOpenChange, selectedModel, onSelectModel }) => 
                   {submitting ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
                   ) : null}
-                  {submitting ? "Sending…" : "Send to studio"}
+                  {submitting ? t("inquiry.sending") : t("inquiry.send")}
                 </button>
                 <span className="text-[11px] text-stone-500 uppercase tracking-[0.18em]">
-                  Typical reply within 24h
+                  {t("inquiry.reply")}
                 </span>
               </div>
             </form>

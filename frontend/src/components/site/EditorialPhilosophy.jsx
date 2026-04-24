@@ -1,4 +1,5 @@
 import React from "react";
+import { useI18n } from "@/lib/i18n";
 
 const IMAGES = [
   {
@@ -26,6 +27,7 @@ const IMAGES = [
 ];
 
 const EditorialPhilosophy = () => {
+  const { t } = useI18n();
   return (
     <section
       id="philosophy"
@@ -34,36 +36,23 @@ const EditorialPhilosophy = () => {
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
         <div className="lg:sticky lg:top-32">
-          <span className="section-label">The studio</span>
-          <h2 className="mt-5 font-display font-[800] text-stone-900 text-[40px] md:text-[56px] leading-[0.98] tracking-tightest">
-            We make one plate<br />at a time — on purpose.
+          <span className="section-label">{t("philosophy.label")}</span>
+          <h2 className="mt-5 font-display font-[800] text-stone-900 text-[40px] md:text-[56px] leading-[0.98] tracking-tightest whitespace-pre-line">
+            {t("philosophy.h2")}
           </h2>
           <div className="mt-8 space-y-5 text-stone-700 text-[16px] md:text-[17px] leading-[1.8] max-w-xl">
-            <p>
-              Anthony began casting name plates in 1987 — slowly, deliberately,
-              a single doorway at a time. Today the studio is run with his son
-              Jackson, but the rhythm hasn&apos;t changed: design, review,
-              render, cast, finish, deliver.
-            </p>
-            <p>
-              Every commission receives a full rendered preview before
-              production. We change a curve, a weight, a corner radius — until
-              it feels inevitable. Only then do we cut metal.
-            </p>
-            <p>
-              That patience is why most of our work arrives earlier than
-              promised. It&apos;s also why a plate we made in 2004 is still
-              weathering beautifully on a Begur doorway today.
-            </p>
+            <p>{t("philosophy.p1")}</p>
+            <p>{t("philosophy.p2")}</p>
+            <p>{t("philosophy.p3")}</p>
           </div>
 
           <dl className="mt-10 grid grid-cols-3 gap-6 max-w-lg">
             {[
-              ["3", "Generations"],
-              ["128", "Reviews · 4.9★"],
-              ["38+", "Years of craft"],
-            ].map(([n, l]) => (
-              <div key={l}>
+              ["3", t("philosophy.stat_gen")],
+              ["128", t("philosophy.stat_rev")],
+              ["38+", t("philosophy.stat_yrs")],
+            ].map(([n, l], i) => (
+              <div key={i}>
                 <dt className="font-display font-bold text-[32px] text-stone-900 tracking-tightest">
                   {n}
                 </dt>

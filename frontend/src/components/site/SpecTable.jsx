@@ -1,42 +1,19 @@
 import React from "react";
 import { MODELS } from "@/lib/constants";
-
-const ROWS = [
-  {
-    label: "Material",
-    values: ["Solid cast brass", "Bronze alloy · patina", "Acrylic + aluminum"],
-  },
-  {
-    label: "Finish",
-    values: ["Hand-polished lustre", "Antique patina", "Edge-lit, warm LED"],
-  },
-  {
-    label: "Lettering",
-    values: ["Raised, cast", "Raised, cast", "Laser-cut, face-lit"],
-  },
-  {
-    label: "Best for",
-    values: ["Villas · heritage gates", "Apartments · lobbies", "Offices · clinics · cafés"],
-  },
-  {
-    label: "Weathering",
-    values: ["Ages beautifully outdoors", "Patina deepens over years", "Indoor & shaded outdoor"],
-  },
-  {
-    label: "Rendered preview",
-    values: ["Included", "Included", "Included"],
-  },
-  {
-    label: "Typical lead time",
-    values: ["10–14 days", "12–16 days", "7–10 days"],
-  },
-  {
-    label: "Starts at",
-    values: ["₹3,200", "₹3,800", "₹4,500"],
-  },
-];
+import { useI18n } from "@/lib/i18n";
 
 const SpecTable = ({ selected }) => {
+  const { t } = useI18n();
+  const ROWS = [
+    { label: "Material", values: ["Solid cast brass", "Bronze alloy · patina", "Acrylic + aluminum"] },
+    { label: "Finish", values: ["Hand-polished lustre", "Antique patina", "Edge-lit, warm LED"] },
+    { label: "Lettering", values: ["Raised, cast", "Raised, cast", "Laser-cut, face-lit"] },
+    { label: "Best for", values: ["Villas · heritage gates", "Apartments · lobbies", "Offices · clinics · cafés"] },
+    { label: "Weathering", values: ["Ages beautifully outdoors", "Patina deepens over years", "Indoor & shaded outdoor"] },
+    { label: "Rendered preview", values: ["Included", "Included", "Included"] },
+    { label: "Typical lead time", values: ["10–14 days", "12–16 days", "7–10 days"] },
+    { label: "Starts at", values: ["₹3,200", "₹3,800", "₹4,500"] },
+  ];
   const featuredIdx = MODELS.findIndex((m) => m.id === selected);
   return (
     <section
@@ -46,9 +23,9 @@ const SpecTable = ({ selected }) => {
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <div className="mb-14 max-w-3xl">
-          <span className="section-label">A side-by-side</span>
-          <h2 className="mt-4 font-display font-[800] text-stone-900 text-[40px] md:text-[56px] leading-[0.98] tracking-tightest">
-            Specifications,<br />read at a glance.
+          <span className="section-label">{t("specs.label")}</span>
+          <h2 className="mt-4 font-display font-[800] text-stone-900 text-[40px] md:text-[56px] leading-[0.98] tracking-tightest whitespace-pre-line">
+            {t("specs.h2")}
           </h2>
         </div>
 
@@ -57,7 +34,7 @@ const SpecTable = ({ selected }) => {
             <thead>
               <tr className="border-b border-stone-300">
                 <th className="text-left py-5 pr-6 text-[11px] uppercase tracking-[0.22em] text-stone-500 font-medium">
-                  Feature
+                  {t("specs.feature")}
                 </th>
                 {MODELS.map((m, i) => (
                   <th
@@ -76,7 +53,7 @@ const SpecTable = ({ selected }) => {
                       {m.name}
                       {i === featuredIdx && (
                         <span className="ml-2 text-[10px] uppercase tracking-[0.2em] bg-stone-900 text-stone-50 px-2 py-0.5 rounded-full font-sans">
-                          Your pick
+                          {t("specs.yourPick")}
                         </span>
                       )}
                     </div>

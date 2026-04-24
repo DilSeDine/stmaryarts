@@ -1,6 +1,7 @@
 import React from "react";
 import { Check, Hammer, Sparkles, Lightbulb } from "lucide-react";
 import { MODELS } from "@/lib/constants";
+import { useI18n } from "@/lib/i18n";
 
 const IconFor = ({ id }) => {
   if (id === "brass")
@@ -11,6 +12,7 @@ const IconFor = ({ id }) => {
 };
 
 const ModelSelection = ({ selected, onSelect }) => {
+  const { t } = useI18n();
   return (
     <section
       id="models"
@@ -20,15 +22,13 @@ const ModelSelection = ({ selected, onSelect }) => {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div>
-            <span className="section-label">Choose your material</span>
-            <h2 className="mt-4 font-display font-[800] text-stone-900 text-[40px] md:text-[56px] leading-[0.98] tracking-tightest max-w-2xl">
-              Three materials.<br />
-              One quiet doorway ritual.
+            <span className="section-label">{t("models.label")}</span>
+            <h2 className="mt-4 font-display font-[800] text-stone-900 text-[40px] md:text-[56px] leading-[0.98] tracking-tightest max-w-2xl whitespace-pre-line">
+              {t("models.h2")}
             </h2>
           </div>
           <p className="text-stone-600 max-w-sm text-[15px] leading-relaxed">
-            Every plate begins with a conversation. Pick the material that
-            speaks to your space — we render a preview before any metal is cut.
+            {t("models.p")}
           </p>
         </div>
 
@@ -94,7 +94,7 @@ const ModelSelection = ({ selected, onSelect }) => {
                       active ? "text-stone-900" : "text-stone-400"
                     }`}
                   >
-                    {active ? "Selected" : "Select"}
+                    {active ? t("models.selected") : t("models.select")}
                   </span>
                 </div>
               </button>

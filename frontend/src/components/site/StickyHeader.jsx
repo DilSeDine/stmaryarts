@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Search, ShoppingBag, Menu, X } from "lucide-react";
+import LanguageSwitcher from "@/components/site/LanguageSwitcher";
+import { useI18n } from "@/lib/i18n";
 
-const NAV = [
-  { label: "Models", href: "#models" },
-  { label: "Philosophy", href: "#philosophy" },
-  { label: "Places", href: "#places" },
-  { label: "Specs", href: "#specs" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Visit", href: "#visit" },
-];
+const NAV_KEYS = ["models", "philosophy", "places", "specs", "reviews", "visit"];
+const HREFS = {
+  models: "#models",
+  philosophy: "#philosophy",
+  places: "#places",
+  specs: "#specs",
+  reviews: "#reviews",
+  visit: "#visit",
+};
 
-const StickyHeader = ({ onOpenInquiry, cartCount = 1 }) => {
+const StickyHeader = ({ onOpenInquiry, onOpenAppointment, cartCount = 1 }) => {
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -43,24 +47,25 @@ const StickyHeader = ({ onOpenInquiry, cartCount = 1 }) => {
           </span>
         </a>
 
-        <nav className="hidden md:flex items-center gap-8">
-          {NAV.map((n) => (
+        <nav className="hidden lg:flex items-center gap-8">
+          {NAV_KEYS.map((k) => (
             <a
-              key={n.href}
-              href={n.href}
-              data-testid={`nav-${n.label.toLowerCase()}-link`}
+              key={k}
+              href={HREFS[k]}
+              data-testid={`nav-${k}-link`}
               className="text-[13px] uppercase tracking-[0.18em] font-medium text-stone-700 hover:text-stone-900 transition-colors"
             >
-              {n.label}
+              {t(`nav.${k}`)}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <LanguageSwitcher />
           <button
             aria-label="Search"
             data-testid="header-search-btn"
-            className="p-2 rounded-full hover:bg-stone-100 transition-colors"
+            className="hidden md:inline-flex p-2 rounded-full hover:bg-stone-100 transition-colors"
           >
             <Search className="w-4 h-4 text-stone-800" />
           </button>
@@ -68,7 +73,7 @@ const StickyHeader = ({ onOpenInquiry, cartCount = 1 }) => {
             aria-label="Cart"
             data-testid="header-cart-btn"
             onClick={onOpenInquiry}
-            className="relative p-2 rounded-full hover:bg-stone-100 transition-colors"
+            className="hidden md:inline-flex relative p-2 rounded-full hover:bg-stone-100 transition-colors"
           >
             <ShoppingBag className="w-4 h-4 text-stone-800" />
             {cartCount > 0 && (
@@ -76,14 +81,21 @@ const StickyHeader = ({ onOpenInquiry, cartCount = 1 }) => {
             )}
           </button>
           <button
-            data-testid="header-cta-btn"
-            onClick={onOpenInquiry}
-            className="hidden md:inline-flex items-center gap-2 bg-stone-900 text-stone-50 rounded-full px-5 py-2.5 text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-stone-800 transition-colors"
+            data-testid="header-book-btn"
+            onClick={onOpenAppointment}
+            className="hidden md:inline-flex items-center gap-2 rounded-full border-2 border-stone-900 text-stone-900 px-4 py-2 text-[11px] uppercase tracking-[0.2em] font-medium hover:bg-stone-900 hover:text-stone-50 transition-colors"
           >
-            Request Design
+            {t("nav.book")}
           </button>
           <button
-            className="md:hidden p-2"
+            data-testid="header-cta-btn"
+            onClick={onOpenInquiry}
+            className="hidden md:inline-flex items-center gap-2 bg-stone-900 text-stone-50 rounded-full px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] font-medium hover:bg-stone-800 transition-colors"
+          >
+            {t("nav.request")}
+          </button>
+          <button
+            className="lg:hidden p-2"
             onClick={() => setOpen((s) => !s)}
             data-testid="mobile-menu-btn"
             aria-label="Menu"
@@ -94,27 +106,38 @@ const StickyHeader = ({ onOpenInquiry, cartCount = 1 }) => {
       </div>
 
       {open && (
-        <div className="md:hidden absolute top-[80px] left-0 right-0 bg-[#FAF7F5]/95 backdrop-blur-xl border-b border-stone-200">
+        <div className="lg:hidden absolute top-[80px] left-0 right-0 bg-[#FAF7F5]/95 backdrop-blur-xl border-b border-stone-200">
           <div className="flex flex-col px-6 py-6 gap-4">
-            {NAV.map((n) => (
+            {NAV_KEYS.map((k) => (
               <a
-                key={n.href}
-                href={n.href}
+                key={k}
+                href={HREFS[k]}
                 onClick={() => setOpen(false)}
                 className="text-sm uppercase tracking-[0.18em] text-stone-800"
               >
-                {n.label}
+                {t(`nav.${k}`)}
               </a>
             ))}
-            <button
-              onClick={() => {
-                setOpen(false);
-                onOpenInquiry();
-              }}
-              className="mt-2 bg-stone-900 text-stone-50 rounded-full px-5 py-3 text-[12px] uppercase tracking-[0.2em]"
-            >
-              Request Design
-            </button>
+            <div className="flex flex-col gap-3 mt-2">
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  onOpenAppointment();
+                }}
+                className="rounded-full border-2 border-stone-900 text-stone-900 px-5 py-3 text-[12px] uppercase tracking-[0.2em]"
+              >
+                {t("nav.book")}
+              </button>
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  onOpenInquiry();
+                }}
+                className="bg-stone-900 text-stone-50 rounded-full px-5 py-3 text-[12px] uppercase tracking-[0.2em]"
+              >
+                {t("nav.request")}
+              </button>
+            </div>
           </div>
         </div>
       )}

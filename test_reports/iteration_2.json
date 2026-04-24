@@ -1,0 +1,38 @@
+{
+  "summary": "Iteration 2 testing complete. 22/22 backend pytest cases pass (health, inquiries, appointments, admin auth). All frontend flows verified via Playwright: EN/KN/HI language switching + localStorage persistence ('stmary_lang'=kn survives reload), hero headline translated to Kannada; header/checkout/contact Book Visit buttons all open AppointmentDialog; Sunday date selection disables submit and shows closed message; end-to-end appointment creation persists to backend and shows appointment-success; footer-admin-link resolves to /admin; /admin login rejects wrong password, accepts 'Admin@123', token persists in localStorage, Inquiries/Appointments tabs switch, refresh button works, signout clears token and returns to login. Resend email integration confirmed sending (log line 'Resend email sent id=<uuid>' observed for inquiries and appointments). No _id leakage from MongoDB on any list endpoint.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/appointments, /api/inquiries", "issue": "Resend free tier is rate-limited to 5 req/sec; when tests fire multiple emails in parallel, resend.exceptions.RateLimitError is raised inside send_notification_email. Because it runs in a BackgroundTask and is caught by the try/except, API responses are unaffected (still 200). Consider adding a small in-process semaphore or retry-with-backoff if email volume grows."},
+      {"endpoint": "POST /api/admin/login", "issue": "Returns the raw ADMIN_PASSWORD as the bearer token (by design per spec), which means the shared-secret is stored in localStorage on the client. Acceptable for this MVP but not production-grade."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "server.py still uses deprecated @app.on_event('shutdown'); migrate to FastAPI lifespan context manager.",
+    "AppointmentCreate.date uses str with min/max length 10 only — does not actually validate YYYY-MM-DD format or that it is a calendar date; a regex or date parser would harden input validation.",
+    "AppointmentCreate.slot is a free-form string; the frontend constrains to a fixed SLOTS list, but the backend accepts any 1-20 char value. Consider an enum/Literal for the slot to reject off-grid values like '2:00 AM'.",
+    "Admin token scheme returns and compares the raw ADMIN_PASSWORD — fine for the MVP but should be replaced with a short-lived signed token (JWT or opaque session id) before production.",
+    "send_notification_email silently swallows RateLimitError; consider light exponential backoff + retry since current behaviour means bursts of submissions may drop emails."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "Admin password: Admin@123 (from backend/.env). No /app/memory/test_credentials.md present; not needed for this simple shared-secret auth.",
+  "seed_data_creation": "Created several TEST_-prefixed Appointment + Inquiry docs in MongoDB (test_database) during pytest and the Playwright submission (name starting with 'TEST_UI_'). No cleanup endpoint exists; documents remain.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend tests at /app/backend/tests/backend_test.py cover: root health, inquiries CRUD + validation + desc sort, appointments CRUD + validation + desc sort, admin login (correct/wrong), admin GET inquiries/appointments (no-auth, wrong-token, valid-token). All 22 pass. Admin bearer scheme: token equals ADMIN_PASSWORD ('Admin@123'). Frontend data-testids added this iteration: language-switcher, lang-option-{en|kn|hi}, header-book-btn, checkout-book-btn, contact-book-btn, footer-admin-link, appointment-dialog, appt-{name|phone|email|date|slot|purpose|notes}-input/select, appt-submit-btn, appointment-success, appointment-close-btn, admin-back-link, admin-login, admin-password-input, admin-login-btn, admin-tabs, tab-inquiries, tab-appointments, admin-refresh-btn, admin-signout-btn, inquiry-row-<id>, appointment-row-<id>. localStorage keys: 'stmary_lang' (en|kn|hi), 'stmary_admin_token'. Resend rate limit errors are logged (not fatal). All iteration 1 regressions unaffected.",
+  "rca of the issue": "No issues found."
+}

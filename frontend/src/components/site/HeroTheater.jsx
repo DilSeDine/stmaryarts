@@ -1,7 +1,9 @@
 import React from "react";
 import { ArrowRight, Star } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 const HeroTheater = ({ onOpenInquiry }) => {
+  const { t } = useI18n();
   return (
     <section
       id="top"
@@ -11,7 +13,6 @@ const HeroTheater = ({ onOpenInquiry }) => {
       <div className="absolute inset-0 hero-radial pointer-events-none" />
 
       <div className="relative max-w-[1400px] mx-auto px-6 md:px-12">
-        {/* Small eyebrow */}
         <div className="flex items-center justify-center gap-3 mb-8 animate-fade-in">
           <div className="flex items-center gap-1.5">
             {[0, 1, 2, 3, 4].map((i) => (
@@ -22,34 +23,31 @@ const HeroTheater = ({ onOpenInquiry }) => {
             ))}
           </div>
           <span className="text-[12px] uppercase tracking-[0.22em] text-stone-600">
-            4.9 · 128 Reviews · Begur, Bengaluru
+            {t("hero.rating")}
           </span>
         </div>
 
-        {/* Headline */}
         <h1
           data-testid="hero-headline"
-          className="font-display font-[800] text-stone-900 text-[44px] sm:text-[60px] md:text-[80px] lg:text-[96px] leading-[0.92] tracking-tightest text-center max-w-5xl mx-auto animate-fade-in-up"
+          className="font-display font-[800] text-stone-900 text-[40px] sm:text-[56px] md:text-[76px] lg:text-[92px] leading-[0.96] tracking-tightest text-center max-w-5xl mx-auto animate-fade-in-up"
         >
-          Name plates,{" "}
-          <span className="italic font-medium text-stone-600">handcrafted</span>{" "}
-          for the <br className="hidden md:block" />
-          doorways that matter.
+          {t("hero.h1_a")}{" "}
+          <span className="italic font-medium text-stone-600">
+            {t("hero.h1_b")}
+          </span>{" "}
+          {t("hero.h1_c")} <br className="hidden md:block" />
+          {t("hero.h1_d")}
         </h1>
 
-        {/* Subtext */}
         <p
           className="mt-8 text-stone-600 text-[17px] md:text-[20px] leading-relaxed max-w-2xl mx-auto text-center animate-fade-in-up"
           style={{ animationDelay: "150ms" }}
         >
-          Three generations of metal-work, one quiet studio in Begur. Each plate
-          is cast, cut and finished by hand — then delivered with a rendered
-          preview before a single letter is cut.
+          {t("hero.sub")}
         </p>
 
-        {/* Buttons */}
         <div
-          className="mt-10 flex items-center justify-center gap-6 animate-fade-in-up"
+          className="mt-10 flex flex-wrap items-center justify-center gap-4 md:gap-6 animate-fade-in-up"
           style={{ animationDelay: "300ms" }}
         >
           <button
@@ -57,7 +55,7 @@ const HeroTheater = ({ onOpenInquiry }) => {
             onClick={onOpenInquiry}
             className="group inline-flex items-center gap-2 bg-stone-900 text-stone-50 rounded-full px-7 py-4 text-[13px] uppercase tracking-[0.2em] font-medium hover:bg-stone-800 transition-all duration-300"
           >
-            Begin a design
+            {t("hero.primary")}
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </button>
           <a
@@ -65,11 +63,10 @@ const HeroTheater = ({ onOpenInquiry }) => {
             data-testid="hero-secondary-link"
             className="text-[13px] uppercase tracking-[0.2em] font-medium text-stone-800 border-b border-stone-900 pb-1 hover:text-stone-600 hover:border-stone-400 transition-colors"
           >
-            Compare materials
+            {t("hero.secondary")}
           </a>
         </div>
 
-        {/* Hero image - 21:9 */}
         <div
           className="mt-16 md:mt-24 relative animate-fade-in-up"
           style={{ animationDelay: "500ms" }}
@@ -85,16 +82,15 @@ const HeroTheater = ({ onOpenInquiry }) => {
               }}
             />
 
-            {/* Material badges */}
             <div
               data-testid="material-badge-top"
               className="hidden md:flex absolute top-8 left-8 flex-col gap-1 backdrop-blur-md bg-white/85 border border-stone-200 rounded-2xl px-5 py-4 shadow-sm"
             >
               <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-stone-500">
-                Materials
+                {t("hero.badge_materials")}
               </span>
               <span className="text-[14px] font-medium text-stone-900">
-                Cast Brass · Hand-finished
+                {t("hero.badge_materials_val")}
               </span>
             </div>
 
@@ -103,21 +99,20 @@ const HeroTheater = ({ onOpenInquiry }) => {
               className="hidden md:flex absolute bottom-8 right-8 flex-col gap-1 backdrop-blur-md bg-white/85 border border-stone-200 rounded-2xl px-5 py-4 shadow-sm"
             >
               <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-stone-500">
-                Craft
+                {t("hero.badge_craft")}
               </span>
               <span className="text-[14px] font-medium text-stone-900">
-                Rendered preview before production
+                {t("hero.badge_craft_val")}
               </span>
             </div>
           </div>
 
-          {/* Caption row */}
           <div className="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-[13px] text-stone-500">
             <span className="uppercase tracking-[0.22em]">
-              Studio · Begur, Bengaluru
+              {t("hero.cap_left")}
             </span>
             <span className="uppercase tracking-[0.22em]">
-              Est. craftsmanship · 3 generations
+              {t("hero.cap_right")}
             </span>
           </div>
         </div>
