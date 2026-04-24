@@ -32,6 +32,16 @@ Build a premium 'Showroom' landing page for St Mary Arts — a sign & name-plate
 - Fonts: Cabinet Grotesk + Satoshi via Fontshare.
 - Test report: iteration_1 · 100% backend + 100% frontend.
 
+### Iteration 2 (Dec 2025)
+- Appointment scheduler (`AppointmentDialog.jsx`) with date/slot/purpose/notes; Sundays blocked client-side; slots 10 AM–7 PM.
+- Resend email notifications on every new inquiry and appointment → `dilsedine@gmail.com` via `send_notification_email` (BackgroundTasks, non-blocking). Rate-limit errors are caught so API stays 200.
+- Admin dashboard at `/admin` (`pages/AdminPage.jsx`): password-gated (shared-secret bearer), tabs for Inquiries / Appointments, refresh + signout.
+- Admin API: `POST /api/admin/login`, `GET /api/admin/inquiries`, `GET /api/admin/appointments` (all protected by `Authorization: Bearer <ADMIN_PASSWORD>`).
+- Public `POST/GET /api/appointments` endpoints with Pydantic validation.
+- EN / ಕನ್ನಡ / हिन्दी language toggle (`lib/i18n.jsx`, `LanguageSwitcher.jsx`) — persists in `localStorage['stmary_lang']`, translates nav, hero, models, philosophy, places, specs, reviews, contact, sticky bar, inquiry + appointment dialogs, admin UI.
+- Footer now has a small `Admin` link.
+- Test report: iteration_2 · 22/22 backend + 100% frontend.
+
 ## P0 / P1 / P2 Backlog
 - P1: Admin dashboard to view submitted inquiries (behind simple auth).
 - P1: Email/WhatsApp notification on new inquiry (e.g., Resend / Twilio).
