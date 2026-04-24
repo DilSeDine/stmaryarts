@@ -40,6 +40,7 @@ export const MODELS = [
   },
   {
     id: "flex",
+    
     name: "Flex & Vinyl Printing",
     subtitle: "Banners · Stickers · Wraps",
     priceLabel: "Starts ₹500",
